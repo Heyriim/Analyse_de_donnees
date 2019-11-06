@@ -1,0 +1,44 @@
+%TP1%
+
+Q1)
+
+clear % nettoie les figures et les variables
+load('fisheriris.mat')  % charge le fichier qui contient la matrice de l'iris (meas 4 colonnes sepal length, sepal width, petal length et petal width. species 1 colonne)
+whos % liste les variables par ordre alphabétique, tailles et types
+
+Q2)Quelle commande vous donne le nombre d'inconnues statistiques ? 
+
+
+Q3)Trouver  les  variables  qualitatives  et  leurs  modalit ́es  associ ́ees  (utiliser  la  commande unique). Sont-elles nominales ou ordinales ?
+
+Q4)Trouver les variables quantitatives. Sont-elles continues ou discrètes 
+
+Q5)Separer la matrice en quatre variables sepalLength, sepalWidth, petalLength, petalWidth
+
+sepalLenght=meas(:,1)
+sepalWidth=meas(:,2)
+petalLenght=meas(:,3)
+petalWidth=meas(:,4)
+
+3.2    Etude de la variable species
+
+Q6)Quels sont les effectifs de chaque modalit ́e ? (indication : il faut recoder les variables textes en num ́erique avec la commande strmatch par exemple pour  ́eviter une boucle)
+
+Q7)
+Les repr ́esentations graphiques classiques li ́ees aux variables qualitatives sont la representation en secteurs ou camembert (pie), la repr ́esentation en bˆatons (hist). Representer ces graphiques.
+
+3.3    Etude de la variable petalLength
+
+Première approche : graphique
+
+Q8)Tracer l’histogramme en fr ́equences relatives et l’histogramme des fr ́equences relatives
+cumul ́ees (histc). Faire varier le nombre de classes de l’histogramme (cf. aide).
+
+Q9)D ́ecrire les caract ́eristiques de l’histogramme et analyser ces caract ́eristiques en fonction du nombre de classes.
+
+Q10)Tracer la boite à moustaches (boxplot) et rappeler les diff ́erents  ́el ́ements la constituant.
+
+Deuxième approche : resumes numeriques
+
+Q11)Calculer les resumes  numeriques  de  localisation  (moyenne  et  m ́ediane)  et  ceux  dedispersion : ( ́ecart-type, variance et quartiles). Retrouver en particulier, les valeurs des  ́elements
+de la boite `a mous

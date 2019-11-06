@@ -1,0 +1,395 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>TP5finNuma</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-10-10"><meta name="DC.source" content="TP5finNuma.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Question 1</a></li><li><a href="#3">Question 2</a></li><li><a href="#4">Question 3</a></li></ul></div><pre class="codeinput"><span class="comment">%**************************************************************************</span>
+<span class="comment">%******************************* TP 5 *************************************</span>
+<span class="comment">%**************************************************************************</span>
+</pre><h2 id="2">Question 1</h2><pre class="codeinput">clear
+n_sat = [1:9];
+n_obs = [6 15 9 25 17 10 8 7 3];
+
+<span class="comment">% 1.a</span>
+esp = sum(n_obs .* n_sat) ./ sum(n_obs)
+
+<span class="comment">% my_var1 = sum(n_obs .* n_sat.^2) / sum(n_obs) - esp^2</span>
+my_var = var(n_sat, n_obs)
+
+<span class="comment">% 1.b</span>
+<span class="comment">%Je calcule les probabilit&eacute;s d'une loi de poisson de parametre lambda =4.47</span>
+<span class="comment">%pour un tableau de valeurs th&eacute;oriques comprises de 0 &agrave; 16 (poisspdf).</span>
+<span class="comment">%puis je multiplie par sum(n_obs) pour pouvoir comparer ces probabilit&eacute;s &agrave;</span>
+<span class="comment">%l'&eacute;chantillon empirique.</span>
+
+n_sat_t = [0:16];
+n_obs_t = poisspdf(n_sat_t, 4.47) * sum(n_obs)
+EffectifTotalTheorique = sum(n_obs_t)           <span class="comment">%environ 100</span>
+
+<span class="comment">% 1.c</span>
+
+<span class="comment">% npi doit &ecirc;tre superieur &agrave; 5. On additionne donc les colonnes pour obtenir</span>
+<span class="comment">% 5 dans chacune d'entre elles. Attention on commence par la fin puis on va</span>
+<span class="comment">% vers le d&eacute;but. POur savoir quelle colonne ajouter on se base sur la matrice</span>
+<span class="comment">% th&eacute;orique</span>
+
+MatTheorique = [ sum(n_obs_t(1, 1:2)) n_obs_t(1, 3:8 ) sum( n_obs_t( 1,9:17))] <span class="comment">% npi</span>
+MatReel = [ n_obs(1, 1:7 )   sum(n_obs(1 , 8:9))] <span class="comment">% ni</span>
+
+Chi2Calcule = sum( ( MatReel - MatTheorique).^2 ./ MatTheorique )
+
+r = 8;                              <span class="comment">% nombre de classe ici 8 colonnes</span>
+k = 1;                              <span class="comment">% parametre &agrave; estimer</span>
+alpha = 0.95;
+
+Chi2Theorique = chi2inv(alpha , r-k-1)
+
+<span class="comment">% Le Chi2Calcule est inferieur a l'inverse d'une loi de poisson &agrave; 95% de 6 degr&eacute;s de</span>
+<span class="comment">% libert&eacute;s.</span>
+
+<span class="string">"H0 : on consid&egrave;re que l'&eacute;chantillon a &eacute;t&eacute; produit par une cette loi de poisson"</span>
+<span class="string">"Ici nous avons un test d'ajustement car on cherche &agrave; d&eacute;terminer si X suit la loi de poisson"</span>
+<span class="keyword">if</span> (Chi2Theorique &gt; Chi2Calcule)
+    <span class="string">" l'hypothese H0 n'est pas rejet&eacute;e. Ce n'est donc pas significatif donc cela peut &ecirc;tre une loi de poisson. "</span>
+<span class="keyword">else</span>
+    <span class="string">" l'hypothese est rejet&eacute;e on ne peut pas admettre que c'est une loi de poisson."</span>
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">
+esp =
+
+    4.4700
+
+
+my_var =
+
+    4.1691
+
+
+n_obs_t =
+
+  Columns 1 through 7
+
+    1.1447    5.1170   11.4364   17.0402   19.0424   17.0239   12.6828
+
+  Columns 8 through 14
+
+    8.0989    4.5253    2.2475    1.0047    0.4083    0.1521    0.0523
+
+  Columns 15 through 17
+
+    0.0167    0.0050    0.0014
+
+
+EffectifTotalTheorique =
+
+   99.9995
+
+
+MatTheorique =
+
+  Columns 1 through 7
+
+    6.2617   11.4364   17.0402   19.0424   17.0239   12.6828    8.0989
+
+  Column 8
+
+    8.4131
+
+
+MatReel =
+
+     6    15     9    25    17    10     8    10
+
+
+Chi2Calcule =
+
+    7.6470
+
+
+Chi2Theorique =
+
+   12.5916
+
+
+ans = 
+
+    "H0 : on consid&egrave;re que l'&eacute;chantillon a &eacute;t&eacute; produit par une cette loi de poisson"
+
+
+ans = 
+
+    "Ici nous avons un test d'ajustement car on cherche &agrave; d&eacute;terminer si X suit la loi de poisson"
+
+
+ans = 
+
+    " l'hypothese H0 n'est pas rejet&eacute;e. Ce n'est donc pas significatif donc cela peut &ecirc;tre une loi de poisson. "
+
+</pre><h2 id="3">Question 2</h2><pre class="codeinput">load <span class="string">freshmen.mat</span>
+
+ans = [1:5 ; 3 9 18 36 29 ; 3 3 1 14 13]
+
+male = fresmen(1 ,:);
+<span class="comment">%male = [3 9 18 36 29];</span>
+
+female = fresmen(2 ,:);
+<span class="comment">%female = [3 3 1 14 13];</span>
+
+n_male = sum(male);
+n_female = sum(female);
+<span class="comment">% Let's suppose that both sample follow the same law: men and women all</span>
+<span class="comment">% enjoy initiation at the same level.</span>
+
+<span class="comment">%I calcul an approximate value for the mean probability of each category.</span>
+p_j = (male + female) /(sum(male) + sum(female))
+
+chi2_male = sum((male - p_j .* n_male).^2 ./ (n_male .* p_j));
+chi2_female = sum((female - p_j .* n_female).^2 ./ (n_female .* p_j));
+chi2_total = chi2_male + chi2_female
+chi2_total_th = chi2inv(0.95, (5-1) * (2-1))
+
+<span class="comment">% The chi2 is inferior to P(chi2_0&lt;X)=95 therfore we cannot say that the</span>
+<span class="comment">% two samples don't follow the same law.</span>
+</pre><pre class="codeoutput">
+ans =
+
+     1     2     3     4     5
+     3     9    18    36    29
+     3     3     1    14    13
+
+
+p_j =
+
+    0.0465    0.0930    0.1473    0.3876    0.3256
+
+
+chi2_total =
+
+    6.6214
+
+
+chi2_total_th =
+
+    9.4877
+
+</pre><h2 id="4">Question 3</h2><pre class="codeinput">Re_01 = [23.05 36 31.1 32.65 30.9 31.4 30.85];
+Re_02 = [41.85 25.65 46.7 34.5 36.65 31.45 36.13];
+Re_04 = [47.05 43.45 43 38.65 41.85 35.45 41.57];
+Re_06 = [49.65 73.9 66.45 74.55 62.4 63.75 65.11];
+
+n_value = (length(Re_01) + length(Re_02) + length(Re_04) + length(Re_06))
+<span class="comment">%Let's make the hypothesys : All mean values are the same, the carbon has</span>
+<span class="comment">%no influence on the stiffness of the steel.</span>
+m_01 = mean(Re_01);
+m_02 = mean(Re_02);
+m_04 = mean(Re_04);
+m_06 = mean(Re_06);
+
+var_01 = var(Re_01, 1);
+var_02 = var(Re_02, 1);
+var_04 = var(Re_04, 1);
+var_06 = var(Re_06, 1);
+
+global_mean = mean([m_01, m_02, m_04, m_06]);
+global_var = mean([var_01, var_02, var_04, var_06]);
+
+interfactor_var = (length(Re_01) * (m_01 - global_mean)^2 + length(Re_02) * (m_02 - global_mean)^2 + length(Re_04) * (m_04 - global_mean)^2 + length(Re_06) * (m_06 - global_mean)^2 ) / n_value
+
+F = (interfactor_var / (4 - 1) / (global_var / (n_value - 4)))
+
+<span class="comment">% F is way superior to the theorical chi2. Therefore we have to rejet the</span>
+<span class="comment">% hypothesis that the carbon has no influence on the mechanical</span>
+<span class="comment">% resistance.</span>
+</pre><pre class="codeoutput">
+n_value =
+
+    28
+
+
+interfactor_var =
+
+  171.3045
+
+
+F =
+
+   44.2015
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%**************************************************************************
+%******************************* TP 5 *************************************
+%**************************************************************************
+
+%% Question 1
+clear
+n_sat = [1:9];
+n_obs = [6 15 9 25 17 10 8 7 3];
+
+% 1.a
+esp = sum(n_obs .* n_sat) ./ sum(n_obs)
+
+% my_var1 = sum(n_obs .* n_sat.^2) / sum(n_obs) - esp^2
+my_var = var(n_sat, n_obs)
+
+% 1.b
+%Je calcule les probabilités d'une loi de poisson de parametre lambda =4.47 
+%pour un tableau de valeurs théoriques comprises de 0 à 16 (poisspdf). 
+%puis je multiplie par sum(n_obs) pour pouvoir comparer ces probabilités à
+%l'échantillon empirique.
+
+n_sat_t = [0:16];
+n_obs_t = poisspdf(n_sat_t, 4.47) * sum(n_obs)
+EffectifTotalTheorique = sum(n_obs_t)           %environ 100 
+
+% 1.c
+
+% npi doit être superieur à 5. On additionne donc les colonnes pour obtenir
+% 5 dans chacune d'entre elles. Attention on commence par la fin puis on va
+% vers le début. POur savoir quelle colonne ajouter on se base sur la matrice
+% théorique  
+
+MatTheorique = [ sum(n_obs_t(1, 1:2)) n_obs_t(1, 3:8 ) sum( n_obs_t( 1,9:17))] % npi
+MatReel = [ n_obs(1, 1:7 )   sum(n_obs(1 , 8:9))] % ni 
+
+Chi2Calcule = sum( ( MatReel - MatTheorique).^2 ./ MatTheorique )
+
+r = 8;                              % nombre de classe ici 8 colonnes
+k = 1;                              % parametre à estimer 
+alpha = 0.95;
+
+Chi2Theorique = chi2inv(alpha , r-k-1)
+
+% Le Chi2Calcule est inferieur a l'inverse d'une loi de poisson à 95% de 6 degrés de
+% libertés.
+
+"H0 : on considère que l'échantillon a été produit par une cette loi de poisson"
+"Ici nous avons un test d'ajustement car on cherche à déterminer si X suit la loi de poisson" 
+if (Chi2Theorique > Chi2Calcule)
+    " l'hypothese H0 n'est pas rejetée. Ce n'est donc pas significatif donc cela peut être une loi de poisson. " 
+else 
+    " l'hypothese est rejetée on ne peut pas admettre que c'est une loi de poisson."
+end
+
+%% Question 2
+load freshmen.mat
+
+ans = [1:5 ; 3 9 18 36 29 ; 3 3 1 14 13]
+
+male = fresmen(1 ,:);
+%male = [3 9 18 36 29];
+
+female = fresmen(2 ,:);
+%female = [3 3 1 14 13];
+
+n_male = sum(male);
+n_female = sum(female);
+% Let's suppose that both sample follow the same law: men and women all
+% enjoy initiation at the same level.
+
+%I calcul an approximate value for the mean probability of each category.
+p_j = (male + female) /(sum(male) + sum(female))
+
+chi2_male = sum((male - p_j .* n_male).^2 ./ (n_male .* p_j));
+chi2_female = sum((female - p_j .* n_female).^2 ./ (n_female .* p_j));
+chi2_total = chi2_male + chi2_female
+chi2_total_th = chi2inv(0.95, (5-1) * (2-1))
+
+% The chi2 is inferior to P(chi2_0<X)=95 therfore we cannot say that the
+% two samples don't follow the same law.
+
+%% Question 3
+Re_01 = [23.05 36 31.1 32.65 30.9 31.4 30.85];
+Re_02 = [41.85 25.65 46.7 34.5 36.65 31.45 36.13];
+Re_04 = [47.05 43.45 43 38.65 41.85 35.45 41.57];
+Re_06 = [49.65 73.9 66.45 74.55 62.4 63.75 65.11];
+
+n_value = (length(Re_01) + length(Re_02) + length(Re_04) + length(Re_06))
+%Let's make the hypothesys : All mean values are the same, the carbon has
+%no influence on the stiffness of the steel.
+m_01 = mean(Re_01);
+m_02 = mean(Re_02);
+m_04 = mean(Re_04);
+m_06 = mean(Re_06);
+
+var_01 = var(Re_01, 1);
+var_02 = var(Re_02, 1);
+var_04 = var(Re_04, 1);
+var_06 = var(Re_06, 1);
+
+global_mean = mean([m_01, m_02, m_04, m_06]);
+global_var = mean([var_01, var_02, var_04, var_06]);
+
+interfactor_var = (length(Re_01) * (m_01 - global_mean)^2 + length(Re_02) * (m_02 - global_mean)^2 + length(Re_04) * (m_04 - global_mean)^2 + length(Re_06) * (m_06 - global_mean)^2 ) / n_value
+
+F = (interfactor_var / (4 - 1) / (global_var / (n_value - 4)))
+
+% F is way superior to the theorical chi2. Therefore we have to rejet the
+% hypothesis that the carbon has no influence on the mechanical
+% resistance.
+
+##### SOURCE END #####
+--></body></html>
